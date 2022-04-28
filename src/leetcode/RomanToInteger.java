@@ -146,6 +146,7 @@ public class RomanToInteger {
                 }
             }
             System.out.println(value);
+            //value is the answer
         }
     }
 }
