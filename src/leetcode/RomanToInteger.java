@@ -44,5 +44,108 @@ public class RomanToInteger {
             }
             System.out.println(value);
         }
+
+        else{
+            int lastOneChecked=0;
+            for(int i=0;i<len-1;i++){
+                char c1=s.charAt(i);
+                char c2=s.charAt(i+1);
+                if(c1==73 && c2==86){
+                    value+=4;
+                    lastOneChecked=1;
+                    i++;
+                }
+
+                else if (c1==73 && c2==88){
+                    value+=9;
+                    lastOneChecked=1;
+                    i++;
+                }
+
+                else if(c1==88 && c2==76){
+                    value+=40;
+                    lastOneChecked=1;
+                    i++;
+                }
+
+                else if (c1==88 && c2==67){
+                    value+=90;
+                    lastOneChecked=1;
+                    i++;
+                }
+
+                else if (c1==67 && c2==68){
+                    value+=400;
+                    lastOneChecked=1;
+                    i++;
+                }
+
+                else if (c1==67 && c2==77){
+                    value+=900;
+                    lastOneChecked=1;
+                    i++;
+                }
+
+                else if(c1==73){
+                    value+=1;
+                }
+
+                else if (c1==86){
+                    value+=5;
+                }
+
+                else if(c1==88){
+                    value+=10;
+                }
+
+                else if (c1==76){
+                    value+=50;
+                }
+
+                else if (c1==67){
+                    value+=100;
+                }
+
+                else if (c1==68){
+                    value+=500;
+                }
+
+                else if (c1==77){
+                    value+=1000;
+                }
+
+            }
+            if(lastOneChecked==0){
+                char c1=s.charAt(len-1);
+                if(c1==73){
+                    value+=1;
+                }
+
+                else if (c1==86){
+                    value+=5;
+                }
+
+                else if(c1==88){
+                    value+=10;
+                }
+
+                else if (c1==76){
+                    value+=50;
+                }
+
+                else if (c1==67){
+                    value+=100;
+                }
+
+                else if (c1==68){
+                    value+=500;
+                }
+
+                else if (c1==77){
+                    value+=1000;
+                }
+            }
+            System.out.println(value);
+        }
     }
 }
