@@ -47,7 +47,8 @@ public class RomanToInteger {
 
         else{
             int lastOneChecked=0;
-            for(int i=0;i<len-1;i++){
+            int i=0;
+            for(i=0;i<len-1;i++){
                 char c1=s.charAt(i);
                 char c2=s.charAt(i+1);
                 if(c1==73 && c2==86){
@@ -113,9 +114,9 @@ public class RomanToInteger {
                 else if (c1==77){
                     value+=1000;
                 }
-
+                System.out.println(value);
             }
-            if(lastOneChecked==0){
+            if(lastOneChecked==0 || i==len-1){
                 char c1=s.charAt(len-1);
                 if(c1==73){
                     value+=1;
@@ -144,6 +145,7 @@ public class RomanToInteger {
                 else if (c1==77){
                     value+=1000;
                 }
+
             }
             System.out.println(value);
             //value is the answer
