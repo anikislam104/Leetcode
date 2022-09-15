@@ -9,21 +9,32 @@ public class ValidParentheses {
         if(s.length()==1){
             return false;
         }
+        if(s.startsWith(")") || s.startsWith("]") || s.startsWith("}")){
+            return false;
+        }
+        if(s.endsWith("(") || s.endsWith("[") || s.endsWith("{")){
+            return false;
+        }
         for(int i=0;i<s.length();i++) {
             int followingOpenParenthesis = 0;
             int precedingCloseParenthesis = 0;
-            if (s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '[') {
 
+            if (s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '[') {
+                int beginIndex = i;
+                int endIndex = s.length();
                 for (int j = i + 1; j < s.length(); j++) {
                     if (s.charAt(j) == '(' || s.charAt(j) == '{' || s.charAt(j) == '[') {
                         followingOpenParenthesis++;
                     } else {
-                        break;
+                        followingOpenParenthesis--;
+                        if(followingOpenParenthesis==-1){
+                            endIndex=j;
+                            break;
+                        }
                     }
                 }
-                int beginIndex = i;
-                int endIndex = i + 2 * followingOpenParenthesis + 1;
-                System.out.println(beginIndex + " " + endIndex);
+
+//                System.out.println(beginIndex + " " + endIndex);
                 if (endIndex > s.length() - 1) {
                     return false;
                 }
@@ -35,17 +46,21 @@ public class ValidParentheses {
             }
 
             else{
-
+                int endIndex = i;
+                int beginIndex = -1;
                 for (int j = i - 1; j > -1; j--) {
                     if (s.charAt(j) == ')' || s.charAt(j) == '}' || s.charAt(j) == ']') {
                         precedingCloseParenthesis++;
                     } else {
-                        break;
+                        precedingCloseParenthesis--;
+                        if(precedingCloseParenthesis==-1){
+                            beginIndex=j;
+                            break;
+                        }
                     }
                 }
-                int endIndex = i;
-                int beginIndex = i - 2 * precedingCloseParenthesis - 1;
-                System.out.println(beginIndex + " " + endIndex);
+
+//                System.out.println(beginIndex + " " + endIndex);
                 if (beginIndex < 0) {
                     return false;
                 }
