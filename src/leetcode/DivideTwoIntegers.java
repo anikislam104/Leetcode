@@ -8,49 +8,79 @@ public class DivideTwoIntegers {
         int sum=0;
         int ans=0;
         while(true){
-            if(dividend>0 && divisor>0) {
+            if(dividend>=0 && divisor>0) {
                 if(dividend<divisor){
                     return 0;
                 }
                 sum += divisor;
                 ans++;
                 if (sum == dividend) {
+                    if(ans>Integer.MAX_VALUE){
+                        return Integer.MAX_VALUE;
+                    }
                     return ans;
                 } else if (sum > dividend) {
+                    if(ans>Integer.MAX_VALUE){
+                        return Integer.MAX_VALUE;
+                    }
                     return ans - 1;
                 }
             }
-            else if(dividend>0 && divisor<0){
-                sum -= divisor;
+            else if(dividend>=0 && divisor<0){
+                int absoluteDivisor= -divisor;
+                if(dividend<absoluteDivisor){
+                    return 0;
+                }
+                sum += absoluteDivisor;
                 ans++;
                 if (sum == dividend) {
-                    return ans*-1;
+                    if(ans>Integer.MAX_VALUE+1){
+                        return Integer.MIN_VALUE;
+                    }
+                    return -ans;
                 } else if (sum > dividend) {
-                    return (ans - 1)*-1;
+                    if(ans>Integer.MAX_VALUE+1){
+                        return Integer.MIN_VALUE;
+                    }
+                    return 1-ans;
                 }
             }
             else if(dividend<0 && divisor>0){
-                if(dividend<divisor){
+                int absoluteDividend= -dividend;
+                if(absoluteDividend<divisor){
                     return 0;
                 }
                 sum += divisor;
                 ans++;
-                int temp=dividend*-1;
-                if (sum == temp) {
+                if (sum == absoluteDividend) {
+                    if(ans>Integer.MAX_VALUE+1){
+                        return Integer.MIN_VALUE;
+                    }
                     return -ans;
-                } else if (sum > temp) {
-                    return -(ans - 1);
+                } else if (sum > absoluteDividend) {
+                    if(ans>Integer.MAX_VALUE+1){
+                        return Integer.MIN_VALUE;
+                    }
+                    return 1-ans;
                 }
             }
             else{
+//                System.out.println("here");
                 if(dividend>divisor){
                     return 0;
                 }
                 sum += divisor;
                 ans++;
                 if (sum == dividend) {
+                    System.out.println(ans);
+                    if(ans>Integer.MAX_VALUE){
+                        return Integer.MAX_VALUE;
+                    }
                     return ans;
                 } else if (sum < dividend) {
+                    if(ans>Integer.MAX_VALUE){
+                        return Integer.MAX_VALUE;
+                    }
                     return ans - 1;
                 }
             }
