@@ -1,25 +1,37 @@
 package leetcode;
 class Solution3 {
     public int[] plusOne(int[] digits) {
-        int number=0;
-        int coeff=1;
         int len=digits.length;
+        if(digits[len-1]!=9){
+            digits[len-1]+=1;
+            return digits;
+        }
+        int carry=0;
         for(int i=0;i<digits.length;i++){
-            number+=digits[len-1-i]*coeff;
-            coeff*=10;
+            int digit=digits[len-1-i];
+            int digit_sum=0;
+            if(i==0){
+                digit_sum=digit+1;
+                carry=digit_sum/10;
+                digits[len-1]=digit_sum%10;
+            }
+            else{
+                digit_sum=digit+carry;
+                carry=digit_sum/10;
+                digits[len-1-i]=digit_sum%10;
+            }
         }
-        System.out.println(number);
-        number=number+1;
-        int n=number;
-        int new_len=0;
-        while (n!=0){
-            n=n/10;
-            new_len++;
+        if(carry==0){
+            for(int i=0;i<len;i++){
+                System.out.println(digits[i]);
+            }
+            return digits;
         }
+        int new_len=len+1;
         int[] new_digits=new int[new_len];
-        for(int i=0;i<new_len;i++){
-            new_digits[new_len-1-i]=number%10;
-            number=number/10;
+        new_digits[0]=1;
+        for(int i=0;i<new_len-1;i++){
+            new_digits[i+1]=digits[i];
         }
         for(int i=0;i<new_len;i++){
             System.out.println(new_digits[i]);
@@ -30,7 +42,7 @@ class Solution3 {
 public class PlusOne {
     public static void main(String[] args) {
         Solution3 solution3=new Solution3();
-        int[] a={9,8,7,6,5,4,3,2,1,0};
+        int[] a={5,6,2,0,0,4,6,2,4,9};
         solution3.plusOne(a);
     }
 }
