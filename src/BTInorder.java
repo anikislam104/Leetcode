@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Definition for a binary tree node.
@@ -19,14 +20,22 @@ import java.util.List;
 class BTInorderHelper {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> inorder=new ArrayList<>();
-        TreeNode pseudo_root=root;
-        TreeNode prev_root=null;
-        while (pseudo_root.left!=null){
-            prev_root=pseudo_root;
-            pseudo_root=pseudo_root.left;
+        Stack<TreeNode> stack=new Stack<>();
+        stack.push(root);
+        while(stack.peek()!=null){
+            TreeNode top=stack.peek();
+            if(top.left==null){
+                inorder.add(top.val);
+                stack.pop();
+                if(top.right!=null){
+                    stack.push(top.right);
+                }
+            }
+            else {
+                stack.push(top.left);
+            }
         }
-        inorder.add(pseudo_root.val);
-        inorder.add(prev_root.val);
+        return inorder;
     }
 }
 public class BTInorder {
