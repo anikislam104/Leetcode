@@ -26,12 +26,14 @@ class BTInorderHelper {
             TreeNode top=stack.peek();
             if(top.left==null){
                 inorder.add(top.val);
+                System.out.println(top.val);
                 stack.pop();
                 if(top.right!=null){
                     stack.push(top.right);
                 }
             }
             else {
+                System.out.println();
                 stack.push(top.left);
             }
         }
@@ -39,5 +41,13 @@ class BTInorderHelper {
     }
 }
 public class BTInorder {
-
+    public static void main(String[] args) {
+        TreeNode a=new TreeNode(2,null,null);
+        TreeNode b=new TreeNode(3,a,null);
+        TreeNode c=new TreeNode(5,null,null);
+        TreeNode d=new TreeNode(4,c,null);
+        TreeNode e=new TreeNode(2,b,d);
+        BTInorderHelper bt=new BTInorderHelper();
+        bt.inorderTraversal(e);
+    }
 }
