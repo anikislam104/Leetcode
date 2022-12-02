@@ -18,36 +18,55 @@ import java.util.Stack;
          }
  }
 class BTInorderHelper {
-    public List<Integer> inorderTraversal(TreeNode root) {
+         public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> inorder=new ArrayList<>();
         Stack<TreeNode> stack=new Stack<>();
         stack.push(root);
-        while(stack.peek()!=null){
+    //        System.out.println(stack.peek().val);
+        if(root==null){
+            return inorder;
+        }
+        while(!stack.isEmpty()){
             TreeNode top=stack.peek();
-            if(top.left==null){
+    //            System.out.println(top.val);
+            if(top.left==null || top.left.val==-1){
                 inorder.add(top.val);
-                System.out.println(top.val);
+    //                System.out.println("No left child of "+top.val);
+    //                System.out.println("storing value "+top.val);
                 stack.pop();
                 if(top.right!=null){
                     stack.push(top.right);
+    //                    System.out.println("Has a right child of value "+top.right.val);
                 }
+                top.val=-1;
             }
             else {
-                System.out.println();
+    //                System.out.println("has left child with value "+top.left.val);
                 stack.push(top.left);
             }
+            //print stack
+    //            System.out.print("Stack is: ");
+    //            for (TreeNode node:stack){
+    //                System.out.print(node.val+" ");
+    //            }
+            System.out.println();
+
         }
         return inorder;
     }
+
 }
 public class BTInorder {
     public static void main(String[] args) {
         TreeNode a=new TreeNode(2,null,null);
-        TreeNode b=new TreeNode(3,a,null);
+        TreeNode b=new TreeNode(3,null,a);
         TreeNode c=new TreeNode(5,null,null);
         TreeNode d=new TreeNode(4,c,null);
         TreeNode e=new TreeNode(2,b,d);
         BTInorderHelper bt=new BTInorderHelper();
-        bt.inorderTraversal(e);
+        List<Integer> inorder=bt.inorderTraversal(e);
+        for (Integer i:inorder){
+            System.out.print(i+" ");
+        }
     }
 }
