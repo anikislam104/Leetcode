@@ -72,6 +72,35 @@ class BTInorderHelper {
         return inorder;
     }
 
+    public List<Integer> inorderTraversalGFGMorrisTraversal(TreeNode root){
+        List<Integer> inorder=new ArrayList<>();
+        TreeNode curr=root;
+        while (curr!=null){
+            if(curr.left==null){
+                inorder.add(curr.val);
+                curr=curr.right;
+            }
+            else{
+                TreeNode pre=curr.left;
+                while (pre.right!=null && pre.right!=curr){
+                    pre=pre.right;
+                }
+
+                if(pre.right==null){
+                    pre.right=curr;
+                    curr=curr.left;
+                }
+
+                else {
+                    pre.right=null;
+                    inorder.add(curr.val);
+                    curr=curr.right;
+                }
+            }
+        }
+        return inorder;
+    }
+
 }
 public class BTInorder {
     public static void main(String[] args) {
