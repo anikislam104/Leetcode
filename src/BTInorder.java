@@ -55,6 +55,23 @@ class BTInorderHelper {
         return inorder;
     }
 
+    public List<Integer> inorderTraversalGFG(TreeNode root){
+        List<Integer> inorder=new ArrayList<>();
+        Stack<TreeNode> stack=new Stack<>();
+        TreeNode curr=root;
+        while (curr!=null || !stack.isEmpty()){
+            while (curr!=null){
+                stack.push(curr);
+                curr=curr.left;
+            }
+            curr=stack.peek();
+            stack.pop();
+            inorder.add(curr.val);
+            curr=curr.right;
+        }
+        return inorder;
+    }
+
 }
 public class BTInorder {
     public static void main(String[] args) {
